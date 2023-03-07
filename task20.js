@@ -66,6 +66,19 @@ function onsubmit(e){
     // localStorage.setItem(obj.email, JSON.stringify(obj))
     // showUserOnScreen(obj)
 }
+window.addEventListener("DOMContentLoaded", () =>{
+    axios.get("https://crudcrud.com/api/32b29e7c2b5e4289b8780095e40cb955/appointmentData")
+        .then((respone) =>{
+            console.log(respone)
+
+            for(var i=0; i<respone.data.length;i++){
+                showUserOnScreen(respone.data[i])
+            }
+        })
+        .catch((error) =>{
+            comsole.log(error)
+        })
+})
 
 function showUserOnScreen(obj){
     const parentElem = document.getElementById('users')
