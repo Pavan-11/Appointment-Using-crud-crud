@@ -76,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () =>{
             }
         })
         .catch((error) =>{
-            comsole.log(error)
+            console.log(error)
         })
 })
 
@@ -84,7 +84,7 @@ function showUserOnScreen(obj){
     const parentElem = document.getElementById('users')
 
 
-    // parentElem.innerHTML = parentElem.innerHTML + `<li>${obj.name} - ${obj.email}<input type="button" value= "delete" onclick = "deleteValue"></li>`
+    parentElem.innerHTML = parentElem.innerHTML + `<li>${obj.name} - ${obj.email}<input type="button" value= "delete" onclick = "deleteValue"></li>`
     const childElem = document.createElement('li')
     childElem.textContent = obj.name + '-' + obj.email;
 
@@ -100,6 +100,8 @@ function showUserOnScreen(obj){
         }).catch((err) =>{
             console.log(err)
         })
+        parentElem.removeChild(childElem)
+            localStorage.removeItem(obj.email)
     }
 
 
@@ -107,6 +109,14 @@ function showUserOnScreen(obj){
     editButton.type  = 'button'
     editButton.value = 'edit'
     editButton.onclick = () =>{
+        axios.put("https://crudcrud.com/api/32b29e7c2b5e4289b8780095e40cb955/appointmentData")
+        .then((respone)=>{
+            showUserOnScreen(respone.data)
+            console.log(respone)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
         localStorage.removeItem(obj.email)
         parentElem.removeChild(childElem)
 
