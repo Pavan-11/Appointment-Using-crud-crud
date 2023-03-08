@@ -93,8 +93,13 @@ function showUserOnScreen(obj){
     deleteButton.type = 'button'
     deleteButton.value = 'Delete'
     deleteButton.onclick = () => {
-        localStorage.removeItem(obj.email)
-        parentElem.removeChild(childElem)
+        axios.delete("https://crudcrud.com/api/32b29e7c2b5e4289b8780095e40cb955/appointmentData/64073d0fa997a303e8776746")
+        .then((respone) =>{
+            parentElem.removeChild(childElem)
+            localStorage.removeItem(obj.email)
+        }).catch((err) =>{
+            console.log(err)
+        })
     }
 
 
@@ -128,5 +133,14 @@ function showUserOnScreen(obj){
         nameInput.value = '';
         emailInput.value ='';
     }
+
+
+    // function removeuserFromScreen(){
+    //     const parentNode = document.getElementById('users')
+    //     const childNodeToBeDeleted = document.getElementById(email);
+    //     if(childNodeToBeDeleted){
+    //         parentNode.removeChild(childNodeToBeDeleted)
+    //     }
+    // }
 
 }
